@@ -2,13 +2,17 @@ import chalk from 'chalk'
 import yosay from 'yosay'
 import * as Generator from 'yeoman-generator'
 
-export default class SimpleGenerator extends Generator {
+const GENERATOR_NAME = 'generator-pcf-detaillist'
 
-  constructor(args: any, options: any) {
+type Options = Generator.GeneratorOptions
+
+export default class SimpleGenerator extends Generator<Options> {
+
+  constructor(args: string|string[], options: Options) {
 		super(args, options)
     this.log(
       yosay(
-        `Welcome to the glorious ${chalk.red('generator-pcf-detaillist')} generator!`
+        `Welcome to the glorious ${chalk.red(GENERATOR_NAME)} generator!`
       )
     );
     
