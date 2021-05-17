@@ -1,12 +1,12 @@
 {
-  "name": "generator-pcf-detaillist",
-  "version": "0.0.0",
+  "name": "generator-pcf-detaillistgrid",
+  "version": "0.1.0",
   "description": "",
   "homepage": "",
   "author": {
     "name": "bsorrentino",
     "email": "bartolomeo.sorrentino@gmail.com",
-    "url": ""
+    "url": "https://github.com/soulsoftware/PCF-DetailListGrid-generator"
   },
   "files": [
     "generators"
