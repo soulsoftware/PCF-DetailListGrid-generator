@@ -5,14 +5,19 @@ import helpers from 'yeoman-test'
 
 describe('generator-pcf-detaillist:app', () => {
 
-  beforeAll(() => {
-    return helpers
+  const componentName = 'MyComponent'
+  beforeAll(() => 
+    helpers
       .run( path.join(__dirname, '../generators/app') )
-      .withPrompts({ someAnswer: true });
-  });
+      .withPrompts({ componentName: componentName })
+  )
 
   it('creates files', () => {
-    assert.file(['dummyfile.txt']);
-  });
+    assert.file([ 
+      path.join( componentName, 'package.json' ),
+      path.join( componentName, 'project.pcfproj' ),
+      path.join( componentName, 'pcfconfig.json' ),
+    ])
+  })
 
-});
+})

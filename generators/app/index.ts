@@ -6,7 +6,34 @@ const GENERATOR_NAME = 'generator-pcf-detaillist'
 
 type Options = Generator.GeneratorOptions
 
+type TemplateOptions = {
+  'PCF.Version': "1.0.0"
+  'PCF.Name':string
+  'PCF.Description': string
+  
+}
+
+// Solution/Other/Solution.xml
+type TemplateSolutionOptions = TemplateOptions & {
+  'PCF.Publisher.UniqueName': string,
+  'PCF.Publisher.Description': string
+  'PCF.Publisher.Prefix': string
+}
+
+// src/ControlManifest.Input.xml
+type TemplateManifestOptions = TemplateOptions & {
+  'PCF.Namespace': string,
+  'PCF.Publisher.Description': string
+  'PCF.Publisher.Prefix': string
+}
+
+type Config = Partial<{ 
+  componentName:string
+}>
+
 export default class SimpleGenerator extends Generator<Options> {
+
+  private _config:Config = {}
 
   constructor(args: string|string[], options: Options) {
 		super(args, options)
@@ -21,24 +48,31 @@ export default class SimpleGenerator extends Generator<Options> {
   public async prompting() {
     // Have Yeoman greet the user.
 
-    const prompts = [
+    const prompts:Generator.Questions = [
       {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
+        type: 'input',
+        name: 'componentName',
+        message: 'Give Me Component Name',
+        
       }
     ];
 
-    return this.prompt(prompts).then(props => {
+    return this.prompt(prompts).then( (props:Config) => {
       // To access props later use this.props.someAnswer;
+      console.log( props.componentName )
+      this._config = props
     });
   }
 
+  /**
+   * 
+   */
   public writing() {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+    this.fs.copy( 
+      this.templatePath( 'DetailListGridTemplate'),
+      this.destinationPath(this._config.componentName!)
+      // this.templatePath('dummyfile.txt'),
+      // this.destinationPath('dummyfile.txt')
     );
   }
 

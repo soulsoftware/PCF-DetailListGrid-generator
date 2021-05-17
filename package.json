@@ -78,6 +78,7 @@
   },
   "scripts": {
     "#pretest": "eslint .",
+    "build": "tsc",
     "test": "jest"
   },
   "license": "MIT"
