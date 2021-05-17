@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import yosay from 'yosay'
-import * as Generator from 'yeoman-generator'
+import Generator = require('yeoman-generator')
 
 const GENERATOR_NAME = 'generator-pcf-detaillist'
 
