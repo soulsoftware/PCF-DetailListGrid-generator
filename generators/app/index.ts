@@ -37,12 +37,7 @@ export default class SimpleGenerator extends Generator<Options> {
 
   constructor(args: string|string[], options: Options) {
 		super(args, options)
-    this.log(
-      yosay(
-        `Welcome to the glorious ${chalk.red(GENERATOR_NAME)} generator!`
-      )
-    );
-    
+    this.log(yosay(`Welcome to the ${chalk.red(GENERATOR_NAME)} generator!`))
 	}
 
   public async prompting() {
@@ -77,6 +72,11 @@ export default class SimpleGenerator extends Generator<Options> {
   }
 
   public install() {
-    this.installDependencies();
+    this.destinationRoot( this._config.componentName! )
+    this.installDependencies({ npm: true, bower: false });
+  }
+
+  public end() {
+    
   }
 };

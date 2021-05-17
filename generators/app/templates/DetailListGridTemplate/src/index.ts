@@ -4,7 +4,9 @@ import * as ReactDOM from 'react-dom';
 import {IDetailListGridControlProps, DetailListGridControl}  from './DetailListGridControl'
 
 
-
+/**
+ * PCF component
+ */
 export class DetailListGridTemplate implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
 	private _context: ComponentFramework.Context<IInputs>;

@@ -20,7 +20,7 @@ class SimpleGenerator extends Generator {
     constructor(args, options) {
         super(args, options);
         this._config = {};
-        this.log(yosay_1.default(`Welcome to the glorious ${chalk_1.default.red(GENERATOR_NAME)} generator!`));
+        this.log(yosay_1.default(`Welcome to the ${chalk_1.default.red(GENERATOR_NAME)} generator!`));
     }
     prompting() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -49,7 +49,10 @@ class SimpleGenerator extends Generator {
         );
     }
     install() {
-        this.installDependencies();
+        this.destinationRoot(this._config.componentName);
+        this.installDependencies({ npm: true, bower: false });
+    }
+    end() {
     }
 }
 exports.default = SimpleGenerator;
