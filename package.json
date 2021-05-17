@@ -20,7 +20,9 @@
   ],
   "devDependencies": {
     "@types/jest": "^26.0.23",
+    "@types/yeoman-assert": "^3.1.1",
     "@types/yeoman-generator": "^4.11.4",
+    "@types/yeoman-test": "^4.0.1",
     "@types/yosay": "^2.0.0",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.6.0",
@@ -42,9 +44,6 @@
     "yeoman-generator": "^3.1.1",
     "chalk": "^2.1.0",
     "yosay": "^2.0.2"
-  },
-  "jest": {
-    "testEnvironment": "node"
   },
   "#lint-staged": {
     "*.js": [
@@ -78,7 +77,7 @@
     ]
   },
   "scripts": {
-    "pretest": "eslint .",
+    "#pretest": "eslint .",
     "test": "jest"
   },
   "license": "MIT"
