@@ -69,5 +69,8 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
   "include": ["generators"],
-  "exclude": ["generators/app/templates"]
+  "exclude": [
+    "generators/app/templates",
+    "generators/detaillist/templates"
+  ]
 }

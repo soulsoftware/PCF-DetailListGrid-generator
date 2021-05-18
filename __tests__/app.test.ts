@@ -3,21 +3,32 @@ import path from 'path'
 import assert from 'yeoman-assert'
 import helpers from 'yeoman-test'
 
-describe('generator-pcf-detaillist:app', () => {
+jest.setTimeout(30000)
+
+describe('generator-pcf-fluentui:detaillist', () => {
 
   const componentName = 'MyComponent'
-  beforeAll(() => 
-    helpers
-      .run( path.join(__dirname, '../generators/app') )
-      .withPrompts({ componentName: componentName })
-  )
 
-  it('creates files', () => {
-    assert.file([ 
-      path.join( componentName, 'package.json' ),
-      path.join( componentName, 'project.pcfproj' ),
-      path.join( componentName, 'pcfconfig.json' ),
+  let targetDir = ''
+
+
+  beforeAll( async () => {
+    await helpers
+      .run(path.join(__dirname, '../generators/detaillist'))
+      .inTmpDir(dir => targetDir = dir )
+      //.inDir( '/tmp', dir => targetDir = dir )
+      .withPrompts({ componentName: componentName })
+      .toPromise()
+  })
+
+  it('creates files', async () => {
+      
+    assert.file([
+      path.join( targetDir, componentName, 'package.json'),
+      //path.join( componentName, 'project.pcfproj' ),
+      //path.join( componentName, 'pcfconfig.json' ),
     ])
+    
   })
 
 })

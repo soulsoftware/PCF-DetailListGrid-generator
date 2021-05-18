@@ -15,25 +15,45 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chalk_1 = __importDefault(require("chalk"));
 const yosay_1 = __importDefault(require("yosay"));
 const Generator = require("yeoman-generator");
-const GENERATOR_NAME = 'generator-pcf-detaillist';
-class MainGenerator extends Generator {
+const GENERATOR_NAME = 'generator-pcf-fluentui';
+class DetailListGenerator extends Generator {
     constructor(args, options) {
         super(args, options);
-        this.log(yosay_1.default(`Welcome to the ${chalk_1.default.red(GENERATOR_NAME)}!`));
+        this._config = {};
+        this.log(yosay_1.default(`Welcome to the ${chalk_1.default.red(GENERATOR_NAME)} detaillist sub-generator!`));
     }
     prompting() {
         return __awaiter(this, void 0, void 0, function* () {
+            // Have Yeoman greet the user.
+            const prompts = [
+                {
+                    type: 'input',
+                    name: 'componentName',
+                    message: 'Give Me Component Name',
+                }
+            ];
+            return this.prompt(prompts).then((props) => {
+                // To access props later use this.props.someAnswer;
+                console.log(props.componentName);
+                this._config = props;
+            });
         });
     }
     /**
      *
      */
     writing() {
+        this.fs.copy(this.templatePath('DetailListGridTemplate'), this.destinationPath(this._config.componentName)
+        // this.templatePath('dummyfile.txt'),
+        // this.destinationPath('dummyfile.txt')
+        );
     }
     install() {
+        this.destinationRoot(this._config.componentName);
+        this.installDependencies({ npm: true, bower: false });
     }
     end() {
     }
 }
-exports.default = MainGenerator;
+exports.default = DetailListGenerator;
 ;

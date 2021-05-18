@@ -1,5 +1,5 @@
 {
-  "name": "generator-pcf-detaillistgrid",
+  "name": "generator-pcf-fluentui",
   "version": "0.1.0",
   "description": "",
   "homepage": "",
@@ -11,9 +11,10 @@
   "files": [
     "generators"
   ],
-  "main": "generators/index.js",
+  "main": "generators/app/index.js",
   "keywords": [
     "pcf",
+    "fluentui",
     "datalist",
     "powerapps",
     "yeoman-generator"

@@ -1,3 +1,3 @@
 # generator-pcf-detaillistgrid 
 
-Yeoman generator for generating project compliant with [PCF-DetailListGrid-Template](https://github.com/soulsoftware/PCF-DetailListGrid-Template)
+Yeoman generator for generating PCF project compliant with [Office FluentUI](https://developer.microsoft.com/en-us/fluentui#/)

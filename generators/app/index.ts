@@ -31,49 +31,24 @@ type Config = Partial<{
   componentName:string
 }>
 
-export default class SimpleGenerator extends Generator<Options> {
+export default class MainGenerator extends Generator<Options> {
 
-  private _config:Config = {}
 
   constructor(args: string|string[], options: Options) {
 		super(args, options)
-    this.log(yosay(`Welcome to the ${chalk.red(GENERATOR_NAME)} generator!`))
+    this.log(yosay(`Welcome to the ${chalk.red(GENERATOR_NAME)}!`))
 	}
 
   public async prompting() {
-    // Have Yeoman greet the user.
-
-    const prompts:Generator.Questions = [
-      {
-        type: 'input',
-        name: 'componentName',
-        message: 'Give Me Component Name',
-        
-      }
-    ];
-
-    return this.prompt(prompts).then( (props:Config) => {
-      // To access props later use this.props.someAnswer;
-      console.log( props.componentName )
-      this._config = props
-    });
   }
 
   /**
    * 
    */
   public writing() {
-    this.fs.copy( 
-      this.templatePath( 'DetailListGridTemplate'),
-      this.destinationPath(this._config.componentName!)
-      // this.templatePath('dummyfile.txt'),
-      // this.destinationPath('dummyfile.txt')
-    );
   }
 
   public install() {
-    this.destinationRoot( this._config.componentName! )
-    this.installDependencies({ npm: true, bower: false });
   }
 
   public end() {
