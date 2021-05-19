@@ -1,60 +1,30 @@
 import chalk from 'chalk'
 import yosay from 'yosay'
-import Generator = require('yeoman-generator')
+import yo = require('yeoman-generator')
+import * as util from '../generators-util' 
+import * as path from 'path'
 
-const GENERATOR_NAME = 'generator-pcf-fluentui'
+type Options = yo.GeneratorOptions
 
-type Options = Generator.GeneratorOptions
 
-type TemplateOptions = {
-  'PCF.Version': "1.0.0"
-  'PCF.Name':string
-  'PCF.Description': string
-  
-}
+type Config = util.ComponentConfig
 
-// Solution/Other/Solution.xml
-type TemplateSolutionOptions = TemplateOptions & {
-  'PCF.Publisher.UniqueName': string,
-  'PCF.Publisher.Description': string
-  'PCF.Publisher.Prefix': string
-}
+export default class DetailListGenerator extends util.CommonGenerator<Options> {
 
-// src/ControlManifest.Input.xml
-type TemplateManifestOptions = TemplateOptions & {
-  'PCF.Namespace': string,
-  'PCF.Publisher.Description': string
-  'PCF.Publisher.Prefix': string
-}
-
-type Config = Partial<{ 
-  componentName:string
-}>
-
-export default class DetailListGenerator extends Generator<Options> {
-
-  private _config:Config = {}
+  private _config:util.ComponentConfig = {}
 
   constructor(args: string|string[], options: Options) {
 		super(args, options)
-    this.log(yosay(`Welcome to the ${chalk.red(GENERATOR_NAME)} detaillist sub-generator!`))
 	}
 
   public async prompting() {
     // Have Yeoman greet the user.
 
-    const prompts:Generator.Questions = [
-      {
-        type: 'input',
-        name: 'componentName',
-        message: 'Give Me Component Name',
-        
-      }
-    ];
+    const prompts = util.componentPrompts
 
     return this.prompt(prompts).then( (props:Config) => {
       // To access props later use this.props.someAnswer;
-      console.log( props.componentName )
+      
       this._config = props
     });
   }
@@ -63,17 +33,25 @@ export default class DetailListGenerator extends Generator<Options> {
    * 
    */
   public writing() {
+
+    const pcfconfig = this._config.PCF!
+
     this.fs.copy( 
       this.templatePath( 'DetailListGridTemplate'),
-      this.destinationPath(this._config.componentName!)
-      // this.templatePath('dummyfile.txt'),
-      // this.destinationPath('dummyfile.txt')
+      this.destinationPath(this._config.PCF!.Name!)
     );
+
+    pcfconfig.Constructor = "DetailListGridTemplate"
+    this.copyTemplateFromRoot( pcfconfig )
+      
   }
 
   public install() {
-    this.destinationRoot( this._config.componentName! )
+    const pcfconfig = this._config.PCF!
+
+    this.destinationRoot( pcfconfig.Name )
     this.installDependencies({ npm: true, bower: false });
+  
   }
 
   public end() {

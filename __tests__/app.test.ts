@@ -3,7 +3,6 @@ import path from 'path'
 import assert from 'yeoman-assert'
 import helpers from 'yeoman-test'
 
-jest.setTimeout(30000)
 
 describe('generator-pcf-fluentui:detaillist', () => {
 

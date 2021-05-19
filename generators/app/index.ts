@@ -1,45 +1,45 @@
 import chalk from 'chalk'
+import { Separator, Answers } from 'inquirer'
 import yosay from 'yosay'
-import Generator = require('yeoman-generator')
-
-const GENERATOR_NAME = 'generator-pcf-detaillist'
-
-type Options = Generator.GeneratorOptions
-
-type TemplateOptions = {
-  'PCF.Version': "1.0.0"
-  'PCF.Name':string
-  'PCF.Description': string
-  
-}
-
-// Solution/Other/Solution.xml
-type TemplateSolutionOptions = TemplateOptions & {
-  'PCF.Publisher.UniqueName': string,
-  'PCF.Publisher.Description': string
-  'PCF.Publisher.Prefix': string
-}
-
-// src/ControlManifest.Input.xml
-type TemplateManifestOptions = TemplateOptions & {
-  'PCF.Namespace': string,
-  'PCF.Publisher.Description': string
-  'PCF.Publisher.Prefix': string
-}
+import yo = require('yeoman-generator')
+import * as util from '../generators-util' 
 
 type Config = Partial<{ 
-  componentName:string
+  subgen:string
 }>
 
-export default class MainGenerator extends Generator<Options> {
+type Options = yo.GeneratorOptions
 
+
+export default class MainGenerator extends yo<Options> {
 
   constructor(args: string|string[], options: Options) {
 		super(args, options)
-    this.log(yosay(`Welcome to the ${chalk.red(GENERATOR_NAME)}!`))
+    this.log(yosay(`Welcome to the ${chalk.red(util.GENERATOR_NAME)}!`))
 	}
 
   public async prompting() {
+    const prompts:yo.Questions = [
+      {
+        type: 'list',
+        name: 'subgen',
+        message: 'Which kind of template dow you want?',
+        choices: [
+          {
+            name: 'Generic',
+            disabled: 'Unavailable at this time',
+          },
+          { 
+            name: 'Detail List (Grid View)',
+            value: 'pcf-fluentui:detaillist'
+          }
+        ]
+      }
+    ];
+
+    return this.prompt(prompts).then( (props:Config) => {
+      this.composeWith(props.subgen!, {} )
+    });
   }
 
   /**
