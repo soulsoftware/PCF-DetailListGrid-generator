@@ -47,9 +47,19 @@ const validateName = ( minLenght:number = 1 ) => {
             'please provide a name!' : 
             `value must be at least of ${minLenght} chars`
         }
-  }
+}
+
+const validateVersion = ( input:string ) => {
+    if( /^(\d+)[\.](\d+)[\.](\d+)$/.test(input) ) return true
+    return 'invalid version format! must be - "(d+).(d+).(d+)"'
+}
 
 export const componentPrompts:yo.Questions = [
+    {
+        name: 'PCF.Name',
+        message: 'Component name:',
+        validate: validateName()
+    },
     {
         name: 'PCF.Namespace',
         message: 'Component namespace:',
@@ -57,9 +67,10 @@ export const componentPrompts:yo.Questions = [
         default: 'PCFNamespace'
     },
     {
-        name: 'PCF.Name',
-        message: 'Component name:',
-        validate: validateName()
+        name: 'PCF.Version',
+        message: 'Component initial version:',
+        validate: validateVersion,
+        default: '1.0.0'
     },
     {
         name: 'PCF.Description',
@@ -89,15 +100,16 @@ export const componentPrompts:yo.Questions = [
   
     ];
 
+    
+
     export class CommonGenerator<T extends yo.GeneratorOptions = yo.GeneratorOptions> extends yo<T> {
 
               
-        copyTemplateFromRoot( pcfconfig:TemplateCommonOptions & TemplateManifestOptions & TemplateSolutionOptions ) {
-            assert.ok( pcfconfig.Constructor && pcfconfig.Constructor.trim().length > 0, 'PCF.Constructor not set!' )
+        copyTemplateFromRoot( config:ComponentConfig ) {
+            const isEmpty = ( value:string ) => (value===undefined || value===null || value.trim().length === 0)
 
-            if( !pcfconfig.Version || pcfconfig.Version.trim().length == 0 ) {
-                pcfconfig.Version = '1.0.0'
-            }
+            assert.ok( config.PCF, 'PCF configuration is not set' )
+            assert.ok( !isEmpty(config.PCF.Constructor) , 'PCF.Constructor not set!' )
 
             const root = this.sourceRoot()
             this.sourceRoot( path.join( root, '..', '..', 'app', 'templates' ) )
@@ -105,16 +117,12 @@ export const componentPrompts:yo.Questions = [
             const solutionTpl = path.join('Solution', 'Other', 'Solution.xml')
             this.fs.copyTpl( 
             this.templatePath( solutionTpl ),
-            this.destinationPath( path.join(pcfconfig.Name, solutionTpl) ),
-                pcfconfig
-            )
+            this.destinationPath( path.join(config.PCF.Name, solutionTpl) ), config )
         
             const manifestTpl = path.join('src', 'ControlManifest.Input.xml')
             this.fs.copyTpl( 
             this.templatePath( manifestTpl ),
-            this.destinationPath( path.join(pcfconfig.Name, manifestTpl) ),
-            pcfconfig
-            )
+            this.destinationPath( path.join(config.PCF.Name, manifestTpl) ), config )
         
             this.sourceRoot( root )
         

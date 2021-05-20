@@ -2,7 +2,7 @@
 <manifest>
   <control
     namespace="<%= PCF.Namespace %>" 
-    constructor="<%= PCF.Contructor %>"
+    constructor="<%= PCF.Constructor %>"
     version="<%= PCF.Version %>"
     display-name-key="<%= PCF.Name %>"
     description-key="A custom grid view that utilizes the Office Fabric UI DetailsList control."

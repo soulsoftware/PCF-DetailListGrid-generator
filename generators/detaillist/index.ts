@@ -38,11 +38,11 @@ export default class DetailListGenerator extends util.CommonGenerator<Options> {
 
     this.fs.copy( 
       this.templatePath( 'DetailListGridTemplate'),
-      this.destinationPath(this._config.PCF!.Name!)
+      this.destinationPath(pcfconfig.Name)
     );
 
     pcfconfig.Constructor = "DetailListGridTemplate"
-    this.copyTemplateFromRoot( pcfconfig )
+    super.copyTemplateFromRoot( this._config )
       
   }
 

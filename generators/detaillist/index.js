@@ -49,9 +49,9 @@ class DetailListGenerator extends util.CommonGenerator {
      */
     writing() {
         const pcfconfig = this._config.PCF;
-        this.fs.copy(this.templatePath('DetailListGridTemplate'), this.destinationPath(this._config.PCF.Name));
+        this.fs.copy(this.templatePath('DetailListGridTemplate'), this.destinationPath(pcfconfig.Name));
         pcfconfig.Constructor = "DetailListGridTemplate";
-        this.copyTemplateFromRoot(pcfconfig);
+        super.copyTemplateFromRoot(this._config);
     }
     install() {
         const pcfconfig = this._config.PCF;
