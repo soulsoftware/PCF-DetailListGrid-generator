@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest>
   <control
-    namespace="PCFNamespace" 
-    constructor="DetailListGridTemplate"
-    version="1.0.0"
-    display-name-key="DetailsList Grid"
+    namespace="<%= PCF.Namespace %>" 
+    constructor="<%= PCF.Constructor %>"
+    version="<%= PCF.Version %>"
+    display-name-key="<%= PCF.Name %>"
     description-key="A custom grid view that utilizes the Office Fabric UI DetailsList control."
     control-type="standard">
     <!-- dataset node represents a set of entity records on CDS; allow more than one datasets -->

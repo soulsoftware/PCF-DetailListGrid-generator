@@ -23,7 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CommonGenerator = exports.componentPrompts = exports.GENERATOR_NAME = void 0;
-const yo = require("yeoman-generator");
+const YO = require("yeoman-generator");
 const path = __importStar(require("path"));
 const assert_1 = __importDefault(require("assert"));
 exports.GENERATOR_NAME = 'generator-pcf-fluentui';
@@ -83,7 +83,7 @@ exports.componentPrompts = [
         default: (answers) => `The ${answers.PCF.Publisher.UniqueName} Publisher`
     },
 ];
-class CommonGenerator extends yo {
+class CommonGenerator extends YO {
     copyTemplateFromRoot(config) {
         const isEmpty = (value) => (value === undefined || value === null || value.trim().length === 0);
         assert_1.default.ok(config.PCF, 'PCF configuration is not set');
@@ -92,8 +92,10 @@ class CommonGenerator extends yo {
         this.sourceRoot(path.join(root, '..', '..', 'app', 'templates'));
         const solutionTpl = path.join('Solution', 'Other', 'Solution.xml');
         this.fs.copyTpl(this.templatePath(solutionTpl), this.destinationPath(path.join(config.PCF.Name, solutionTpl)), config);
-        const manifestTpl = path.join('src', 'ControlManifest.Input.xml');
-        this.fs.copyTpl(this.templatePath(manifestTpl), this.destinationPath(path.join(config.PCF.Name, manifestTpl)), config);
+        // const manifestTpl = path.join('src', 'ControlManifest.Input.xml')
+        // this.fs.copyTpl( 
+        // this.templatePath( manifestTpl ),
+        // this.destinationPath( path.join(config.PCF.Name, manifestTpl) ), config )
         this.sourceRoot(root);
     }
 }

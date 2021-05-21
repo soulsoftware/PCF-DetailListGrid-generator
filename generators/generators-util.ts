@@ -1,4 +1,4 @@
-import yo = require('yeoman-generator')
+import YO = require('yeoman-generator')
 import * as path from 'path'
 import assert from 'assert'
 
@@ -54,7 +54,7 @@ const validateVersion = ( input:string ) => {
     return 'invalid version format! must be - "(d+).(d+).(d+)"'
 }
 
-export const componentPrompts:yo.Questions = [
+export const componentPrompts:YO.Questions = [
     {
         name: 'PCF.Name',
         message: 'Component name:',
@@ -102,7 +102,7 @@ export const componentPrompts:yo.Questions = [
 
     
 
-    export class CommonGenerator<T extends yo.GeneratorOptions = yo.GeneratorOptions> extends yo<T> {
+    export class CommonGenerator<T extends YO.GeneratorOptions = YO.GeneratorOptions> extends YO<T> {
 
               
         copyTemplateFromRoot( config:ComponentConfig ) {
@@ -119,10 +119,10 @@ export const componentPrompts:yo.Questions = [
             this.templatePath( solutionTpl ),
             this.destinationPath( path.join(config.PCF.Name, solutionTpl) ), config )
         
-            const manifestTpl = path.join('src', 'ControlManifest.Input.xml')
-            this.fs.copyTpl( 
-            this.templatePath( manifestTpl ),
-            this.destinationPath( path.join(config.PCF.Name, manifestTpl) ), config )
+            // const manifestTpl = path.join('src', 'ControlManifest.Input.xml')
+            // this.fs.copyTpl( 
+            // this.templatePath( manifestTpl ),
+            // this.destinationPath( path.join(config.PCF.Name, manifestTpl) ), config )
         
             this.sourceRoot( root )
         

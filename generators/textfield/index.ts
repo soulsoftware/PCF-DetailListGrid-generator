@@ -1,15 +1,15 @@
 import chalk from 'chalk'
 import yosay from 'yosay'
-import yo = require('yeoman-generator')
+import YO = require('yeoman-generator')
 import * as util from '../generators-util' 
 import * as path from 'path'
 
-type Options = yo.GeneratorOptions
+type Options = YO.GeneratorOptions
 
 
 type Config = util.ComponentConfig
 
-export default class DetailListGenerator extends util.CommonGenerator<Options> {
+export default class TextFieldTemplateGenerator extends util.CommonGenerator<Options> {
 
   private _config:util.ComponentConfig = {}
 
@@ -36,10 +36,9 @@ export default class DetailListGenerator extends util.CommonGenerator<Options> {
 
     const pcfconfig = this._config.PCF!
 
-    pcfconfig.Constructor = "DetailListGridTemplate"
-
+    pcfconfig.Constructor = "TextFieldTemplate"
     this.fs.copyTpl( 
-      this.templatePath( 'DetailListGridTemplate'),
+      this.templatePath(),
       this.destinationPath(pcfconfig.Name),
       this._config
     );

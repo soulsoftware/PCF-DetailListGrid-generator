@@ -29,7 +29,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const util = __importStar(require("../generators-util"));
-class DetailListGenerator extends util.CommonGenerator {
+class TextFieldTemplateGenerator extends util.CommonGenerator {
     constructor(args, options) {
         super(args, options);
         this._config = {};
@@ -49,8 +49,8 @@ class DetailListGenerator extends util.CommonGenerator {
      */
     writing() {
         const pcfconfig = this._config.PCF;
-        pcfconfig.Constructor = "DetailListGridTemplate";
-        this.fs.copyTpl(this.templatePath('DetailListGridTemplate'), this.destinationPath(pcfconfig.Name), this._config);
+        pcfconfig.Constructor = "TextFieldTemplate";
+        this.fs.copyTpl(this.templatePath(), this.destinationPath(pcfconfig.Name), this._config);
         super.copyTemplateFromRoot(this._config);
     }
     install() {
@@ -61,5 +61,5 @@ class DetailListGenerator extends util.CommonGenerator {
     end() {
     }
 }
-exports.default = DetailListGenerator;
+exports.default = TextFieldTemplateGenerator;
 ;

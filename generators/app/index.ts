@@ -32,7 +32,11 @@ export default class MainGenerator extends yo<Options> {
           { 
             name: 'Detail List (Grid View)',
             value: 'pcf-fluentui:detaillist'
-          }
+          },
+          { 
+            name: 'Text Field',
+            value: 'pcf-fluentui:textfield'
+          },
         ]
       }
     ];
