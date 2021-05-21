@@ -79,7 +79,7 @@
   },
   "scripts": {
     "#pretest": "eslint .",
-    "build": "tsc",
+    "build": "tsc --watch",
     "test": "jest"
   },
   "license": "MIT"
