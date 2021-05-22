@@ -1,6 +1,6 @@
 {
-  "name": "generator-pcf-fluentui",
-  "version": "0.1.0",
+  "name": "@soulsoftware/generator-pcf-fluentui",
+  "version": "1.0.0",
   "description": "",
   "homepage": "",
   "author": {
