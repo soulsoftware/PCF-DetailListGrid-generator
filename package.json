@@ -8,6 +8,10 @@
     "email": "bartolomeo.sorrentino@gmail.com",
     "url": "https://github.com/soulsoftware/pcf-fluentui-generator"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soulsoftware/pcf-fluentui-generator.git"
+  },
   "files": [
     "generators"
   ],
