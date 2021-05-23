@@ -71,6 +71,7 @@
   "include": ["generators"],
   "exclude": [
     "generators/app/templates",
-    "generators/detaillist/templates"
+    "generators/detaillist/templates",
+    "generators/textfield/templates"
   ]
 }
