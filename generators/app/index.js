@@ -54,11 +54,11 @@ class MainGenerator extends yo {
                         },
                         {
                             name: 'Detail List (Grid View)',
-                            value: 'pcf-fluentui:detaillist'
+                            value: '@soulsoftware/pcf-fluentui:detaillist'
                         },
                         {
                             name: 'Text Field',
-                            value: 'pcf-fluentui:textfield'
+                            value: '@soulsoftware/pcf-fluentui:textfield'
                         },
                     ]
                 }
